@@ -69,4 +69,24 @@ summary_col
 my_data <- data.frame(my_data, summary_col)
 my_data
 
+# Use complete.cases to show rows where data is missing
+missing_data <- complete.cases(my_data)
+missing_data
 
+# list the rows that do not have missing values
+# Note that the ',' and no number inside square brackets means "all columns"
+my_data[complete.cases(my_data),]
+
+# List rows with missing values
+my_data[!complete.cases(my_data),]
+
+# Find sum of all missing values in the age attribute
+sum(is.na(my_data$Age))
+
+# Find the mean of missign values from the Age attribute
+mean(is.na(my_data$Age))
+
+# Find the mean of rows with no incomplete data
+# Note that we dont need to add the ',' as we're only
+# looking for an overall mean of rows with missing values
+mean(!complete.cases(my_data))
