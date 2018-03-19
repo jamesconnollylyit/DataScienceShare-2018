@@ -52,9 +52,16 @@ my_data <- data.frame(my_data, summary_col)
 # Show data frame contents
 my_data
 
+# Show 
+str(my_data)
+
 # -------------------------------------------------------------------------------
 # Dealing with missing data 
 # -------------------------------------------------------------------------------
+
+# removes any rows that contains NA - listwise deletion
+new_data <- na.omit(my_data)
+new_data
 
 # Use complete.cases to show rows where data is missing
 missing_data <- complete.cases(my_data)

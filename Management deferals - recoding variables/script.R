@@ -69,3 +69,63 @@ summary_col
 my_data <- data.frame(my_data, summary_col)
 my_data
 
+# Convert string to date fields
+# Show structure of the data frame
+str(my_data)
+
+# Example of as.Date() function
+strDates <- c("01/05/1965", "16/08/1975")
+dates <- as.Date(strDates, "%d/%m/%Y")
+dates
+
+# Convert the date field in my_data to a date
+# Original data
+my_data$Date
+
+# Convert from string to relevant structure
+# In this example, convert date string to yyyy-dd-mm
+# as we have to match what is in the original vector
+# before we can convert it
+date_field <- as.Date(my_data$Date, "%Y-%d-%m")
+# Show output
+date_field
+# Replace the date field in the data frame
+my_data$Date <- date_field
+str(my_data)
+my_data
+
+# Example of changing the output date
+date_format <- "%b %d %Y"
+today <- Sys.Date()
+output_date <- format(today, format = date_format)
+output_date
+
+# Display difference between 13th Feb 2004 and 22nd Jan 2018
+startdate <- as.Date("2004-02-13")
+enddate <- as.Date("2018-01-22")
+days <- enddate - startdate
+days
+
+? difftime
+# Calaulate you old I am in days
+todays_date <- Sys.Date()
+my_dob <- as.Date("08-03-1977")
+diff_dates <- difftime(today, my_dob, units = "days")
+diff_dates
+
+#Sorting data by age
+my_data
+new_data <- my_data[order(my_data$Age),]
+new_data
+
+# We can use attach command to bypass need for '$' sign 
+# to identify variables in the data frame
+attach(my_data)
+str(my_data$Age)
+str(my_data$Gender)
+new_data <- my_data[order(Gender, Age),]
+
+# Sort by AgeCat. This is a factored variable
+new_data <- my_data[order(AgeCat),]
+new_data
+
