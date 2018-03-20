@@ -66,21 +66,62 @@ new_data
 # Use complete.cases to show rows where data is missing
 missing_data <- complete.cases(my_data)
 missing_data
+# Show sum of missing rows
+sum(missing_data)
 
 # list the rows that do not have missing values
 # Note that the ',' and no number inside square brackets means "all columns"
-my_data[complete.cases(my_data),]
+complete_data <- my_data[complete.cases(my_data),]
+complete_data
 
 # List rows with missing values
 my_data[!complete.cases(my_data),]
 
 # Find sum of all missing values in the age attribute
 sum(is.na(my_data$Age))
+sum(my_data[complete.cases(my_data)])
 
-# Find the mean of missign values from the Age attribute
+# Find the mean of missing values from the Age attribute
 mean(is.na(my_data$Age))
 
 # Find the mean of rows with no incomplete data
 # Note that we dont need to add the ',' as we're only
 # looking for an overall mean of rows with missing values
 mean(!complete.cases(my_data))
+
+# Selecting data between 2 date ranges
+my_data$Date <- as.Date(my_data$Date, "%d/%m/%Y")
+startdate <- as.Date("2018-01-01")
+enddate <- as.Date("2018-01-31")
+new_data <- my_data[which(my_data$Date >= startdate & my_data$Date <= enddate),]
+new_data
+
+# Deleting attributes from data
+# This command shows all attributes where Q3 or Q4 are contained
+# The ! operator reverses this choice
+include_list <- names(my_data) %in% c("Q3", "Q4")
+include_list
+# This list can the nbe used to extract this data
+new_data <- my_data[(include_list)]
+new_data
+
+# Here's an alternative method (count starts at 0)
+new_data <- my_data[c(-8, -9)]
+new_data
+
+# Using the subset function
+# to extract all records from my_data where age > 35 or age < 24. Only select the 
+# listed attributes
+attach(my_data)
+new_data <- subset(my_data, Age >= 35 | Age < 24, select = c(Q1, Q2, Q3, Q4))
+new_data
+
+# Select a subset of my_data
+# where gender = M and age > 25. Only show records 
+# from Gender to Q4 includive
+new_data <- subset(my_data, Gender == "M" & Age > 25, select = Gender:Q4)
+new_data
+
+# Selecting a random sample from my_data
+my_sample <- my_data[sample(1:nrow(my_data), 3, replace = FALSE),]
+my_sample
