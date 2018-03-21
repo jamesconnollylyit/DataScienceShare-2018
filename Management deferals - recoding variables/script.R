@@ -123,7 +123,7 @@ new_data
 attach(my_data)
 str(my_data$Age)
 str(my_data$Gender)
-new_data <- my_data[order(Gender, Age),]
+new_data <- my_data[order(decreasing = TRUE, Gender, Age),]
 
 # Sort by AgeCat. This is a factored variable
 new_data <- my_data[order(AgeCat),]
