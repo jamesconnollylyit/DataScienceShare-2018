@@ -1,3 +1,5 @@
+# Original data frame description is shown in notes on Blackboard
+
 # Create column names for each attribute in the data frame
 colnames <- c("Date", "Country", "Gender", "Age", "Q1", "Q2", "Q3", "Q4", "Q5")
 
@@ -106,11 +108,11 @@ enddate <- as.Date("2018-01-22")
 days <- enddate - startdate
 days
 
-? difftime
-# Calaulate you old I am in days
+?difftime # Show help on difftime() function
+# Calaulate how old I am in days
 todays_date <- Sys.Date()
 my_dob <- as.Date("08-03-1977")
-diff_dates <- difftime(today, my_dob, units = "days")
+diff_dates <- difftime(today, my_dob, units = "days")# Several unit types available
 diff_dates
 
 #Sorting data by age

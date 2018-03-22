@@ -63,11 +63,11 @@ str(my_data)
 new_data <- na.omit(my_data)
 new_data
 
-# Use complete.cases to show rows where data is missing
-missing_data <- complete.cases(my_data)
-missing_data
+# Use complete.cases to show rows where data is available
+complete_data <- complete.cases(my_data)
+complete_data
 # Show sum of missing rows
-sum(missing_data)
+sum(complete_data)
 
 # list the rows that do not have missing values
 # Note that the ',' and no number inside square brackets means "all columns"
@@ -79,7 +79,6 @@ my_data[!complete.cases(my_data),]
 
 # Find sum of all missing values in the age attribute
 sum(is.na(my_data$Age))
-sum(my_data[complete.cases(my_data)])
 
 # Find the mean of missing values from the Age attribute
 mean(is.na(my_data$Age))
@@ -90,10 +89,17 @@ mean(is.na(my_data$Age))
 mean(!complete.cases(my_data))
 
 # Selecting data between 2 date ranges
-my_data$Date <- as.Date(my_data$Date, "%d/%m/%Y")
-startdate <- as.Date("2018-01-01")
-enddate <- as.Date("2018-01-31")
-new_data <- my_data[which(my_data$Date >= startdate & my_data$Date <= enddate),]
+
+# Convert current date factored variable to date
+# it is currently using yyyy-dd-mm format
+# so we use this same structure to make conversion to date type
+my_data$Date
+converted_date <- as.Date(my_data$Date, "%Y-%d-%m")
+my_data$Date = converted_date
+
+startdate <- as.Date("2018-10-15")
+enddate <- as.Date("2018-11-01")
+new_data <- my_data[my_data$Date >= startdate & my_data$Date <= enddate,]
 new_data
 
 # Deleting attributes from data
