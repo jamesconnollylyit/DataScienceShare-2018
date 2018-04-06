@@ -88,6 +88,42 @@ mean(is.na(my_data$Age))
 # looking for an overall mean of rows with missing values
 mean(!complete.cases(my_data))
 
+# Use the md.pattern() functiuon in the mice package
+# to show tabulated missing data pattern
+install.packages("mice")
+library(mice)
+md.pattern(my_data)
+
+# VIM package includes aggr() function to show number of
+# missing values for each variable and for variable combinations
+install.packages("VIM")
+library(VIM)
+# prop = proportions, numbers either shows or suppresses the numeric labels
+aggr(my_data, prop = FALSE, numbers = TRUE)
+
+# Changing prop = TRUE shows missing data proportionally
+aggr(my_data, prop = TRUE, numbers = TRUE)
+
+# Matrixplot shows missing data in red
+matrixplot(my_data)
+
+# Show 1 = missing and 0 = okay for all data 
+# and convert to a data frame to create a correlation of missing data
+missing_values <- as.data.frame(abs(is.na(my_data)))
+head(missing_values)
+
+# Examine each element in missing values and only
+# store their output if value >0
+# Used to create a correlation matrix between missing values
+correlation_matrix <- missing_values[(apply(missing_values, 2, sum) > 0)]
+correlation_matrix
+# Show correlation matrix between extracted values
+# 1 = perfect positive correlation, -1 = perfect negative correlation
+# and 0 = no correlation (no link)
+cor(correlation_matrix)
+
+
+
 # Selecting data between 2 date ranges
 
 # Convert current date factored variable to date
