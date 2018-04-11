@@ -122,8 +122,6 @@ correlation_matrix
 # and 0 = no correlation (no link)
 cor(correlation_matrix)
 
-
-
 # Selecting data between 2 date ranges
 
 # Convert current date factored variable to date
